@@ -41,6 +41,11 @@ class Book(models.Model):
         return reverse('book-detail', args=[str(self.id)])
     '''get_absolute_url() returns a URL that can be used to access a detail record for this model (for this to work, we will have to define a URL mapping that has the name book-detail, and define an associated view and template).'''
 
+    def display_genre(self):
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+
+    display_genre.short_description = 'Genre'
+
 
 class BookInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
