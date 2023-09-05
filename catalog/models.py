@@ -14,6 +14,14 @@ class Genre(models.Model):
         return self.name
 
 
+class Language(models.Model):
+    name = models.TextField(
+        max_length=100, help_text='Enter the language of the book')
+
+    def __str__(self):
+        return self.name
+
+
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
@@ -23,6 +31,8 @@ class Book(models.Model):
                             help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
     genre = models.ManyToManyField(
         Genre, help_text='Select a genre for the book')
+    language = models.ForeignKey(
+        Language, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.title
