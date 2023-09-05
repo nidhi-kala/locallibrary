@@ -71,8 +71,14 @@ class BookInstance(models.Model):
     class Meta:
         ordering = ['due_date']
 
-    def __str__(self):
-        return f'{self.id} ({self.book.title})'
+    def get_book(self):
+        return f'{self.book.title}'
+
+    def get_due_date(self):
+        return f'{self.due_date}'
+
+    def get_id(self):
+        return f'{self.id}'
 
 
 class Author(models.Model):
