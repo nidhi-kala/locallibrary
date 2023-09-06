@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %} {% block title %}
+<title>Library - Home</title>
+{% endblock %} {% block content %}
+<h1>Library Home</h1>
+<p>Welcome! Here you can access all the books and the authors</p>
+<h2>The library has the following record counts:</h2>
+<ul>
+  <li><strong>Books:</strong> {{num_books }}</li>
+  <li><strong>Copies:</strong> {{num_instances }}</li>
+  <li><strong>Copies available:</strong> {{num_instances_available }}</li>
+  <li><strong>Authors:</strong> {{num_authors }}</li>
+
+  {% if word %}
+  <li>Number of books containing "{{ word }}": {{ num_books_with_word }}</li>
+  <li>Number of genres containing "{{ word }}": {{ num_genres_with_word }}</li>
+  {% endif %}
+</ul>
+{% endblock %}
