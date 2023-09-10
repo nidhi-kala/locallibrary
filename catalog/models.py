@@ -38,7 +38,7 @@ class Book(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('book-detail', args=[str(self.id)])
+        return reverse('book_detail', args=[str(self.id)])
     '''get_absolute_url() returns a URL that can be used to access a detail record for this model (for this to work, we will have to define a URL mapping that has the name book-detail, and define an associated view and template).'''
 
     def display_genre(self):
@@ -91,7 +91,7 @@ class Author(models.Model):
         ordering = ['last_name', 'first_name']
 
     def get_absolute_url(self):
-        return reverse('author-detail', args=[str(self.id)])
+        return reverse('author_detail', args=[str(self.id)])
 
     def __str__(self):
         return f'{self.last_name}, {self.first_name}'

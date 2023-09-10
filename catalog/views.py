@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from typing import Any
+from django.db.models.query import QuerySet
+from django.shortcuts import render, get_object_or_404
 from .models import Book, BookInstance, Author, Genre
 from django.db.models import Q
+from django.views import generic
 
 # Create your views here.
 
@@ -22,3 +25,20 @@ def index(request):
         'num_authors': num_authors,
     }
     return render(request, 'index.html', context=context)
+
+
+class BookListView(generic.ListView):
+    model = Book
+    paginate_by = 2
+
+
+class BookDetailView(generic.DetailView):
+    """Generic class-based detail view for a book."""
+    model = Book
+
+class AuthorListView(generic.ListView):
+    model = Author
+    paginate_by = 10
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
