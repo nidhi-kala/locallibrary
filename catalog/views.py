@@ -18,11 +18,14 @@ def index(request):
     num_genres_with_word = Genre.objects.filter(name__icontains=word).count
     num_books_with_word = Book.objects.filter(
         Q(title__icontains=word) | Q(summary__icontains=word)).count()
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits+1
     context = {
         'num_books': num_books,
         'num_instances': num_instances,
         'num_instances_available': num_instances_available,
         'num_authors': num_authors,
+        'num_visits': num_visits,
     }
     return render(request, 'index.html', context=context)
 
