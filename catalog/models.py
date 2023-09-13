@@ -85,6 +85,8 @@ class BookInstance(models.Model):
 
     def get_id(self):
         return f'{self.id}'
+    def get_overdue(self):
+        return f'{self.is_overdue}'
 
 
 class Author(models.Model):

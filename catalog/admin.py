@@ -30,16 +30,17 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_display = ('book', 'status', 'due_date', 'id')
+    list_display = ('book', 'status','borrower', 'due_date','is_overdue', 'id')
     list_filter = ('status', 'due_date')
     fieldsets = (
         (None, {
             'fields': ('book', 'imprint', 'id')
         }),
         ('Availability', {
-            'fields': ('status', 'due_date')
+            'fields': ('status','borrower', 'due_date')
         }),
     )
+
 
 
 admin.site.register(Genre)
