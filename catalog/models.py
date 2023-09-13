@@ -2,6 +2,8 @@ from django.db import models
 # Used to generate URLs by reversing the URL patterns
 from django.urls import reverse
 import uuid
+from django.contrib.auth.models import User
+from datetime import date
 
 # Create your models here
 
@@ -51,10 +53,14 @@ class BookInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           help_text='Unique ID for this particular book across the whole libary')
-    book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
+    book = models.ForeignKey(Book, on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
     due_date = models.DateField(null=True, blank=True)
-
+    borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    @property
+    def is_overdue(self):
+        return bool(self.due_date and date.today() > self.due_date)
+    
     LOAN_STATUS = (
         ('m', 'Maintenance'),
         ('o', 'On Loan'),

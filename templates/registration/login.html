@@ -10,7 +10,7 @@
   {% if user.is_authenticated %}
     <p> Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
     {% else %}
-    <p> pLease login to see this page </p>
+    <p> please login to see this page </p>
   {% endif %}
 {% endif %}
 
@@ -29,7 +29,7 @@
   </tr>
 </table>
 <input type="submit" value="login" />
-<input tyoe="hidden" name="next" value="{{ next }}" />
+<input type="hidden" name="next" value="{{ next }}" />
 </form>
 
 <p> <a href="{% url 'password_reset' %}" > Forgot password? </a> </p>
